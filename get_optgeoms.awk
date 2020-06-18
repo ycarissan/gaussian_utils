@@ -1,4 +1,5 @@
 BEGIN{igeom=0}
+/Done/{e=$5}
 /Center     Atomic      Atomic             Coordinates \(Angstroms\)/,/Rotational constants/{
         if ($1 ~ /[0-9]+/) {
                 iat=$1
@@ -9,14 +10,16 @@ BEGIN{igeom=0}
         }
 }
 /Stationary point found./{
+	energy[igeom] = e
         igeom++
 }
 END{
         ngeom=igeom-1
         nat=iat
         for (igeom=0; igeom<ngeom; igeom++) {
+		e = energy[igeom]
                 filename=sprintf("geom_%03i.xyz", igeom+1)
-                printf("%4i\n\n",nat)                                >> filename
+                printf("%4i\n%s\n",nat,e)                                >> filename
                 for (iat=1; iat<=nat; iat++) {
                         q = geoms[igeom, iat, "Z"]
                         x = geoms[igeom, iat, "x"]
