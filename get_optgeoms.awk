@@ -16,7 +16,7 @@ BEGIN{igeom=0}
 END{
         ngeom=igeom-1
         nat=iat
-        for (igeom=0; igeom<ngeom; igeom++) {
+        for (igeom=0; igeom<=ngeom; igeom++) {
 		e = energy[igeom]
                 filename=sprintf("geom_%03i.xyz", igeom+1)
                 printf("%4i\n%s\n",nat,e)                                >> filename
