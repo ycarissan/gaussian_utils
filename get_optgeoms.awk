@@ -29,6 +29,7 @@ END{
                         if (q==6) {q="C"}
                         if (q==7) {q="N"}
                         if (q==8) {q="O"}
+                        if (q==17) {q="Cl"}
                         printf("%3s %14.6f %14.6f %14.6f\n",q,x,y,z) >> filename
                 }
         }
